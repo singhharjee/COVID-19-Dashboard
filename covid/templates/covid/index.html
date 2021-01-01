@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"
+            id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <title>COVID Dashboard</title>
+    </head>
+    <style type="text/css">
+        #bg {
+            background-size: 1800px 900px;
+            background-repeat: no-repeat;
+            background-position: top;
+            background-attachment: fixed;
+            background-image:url('{% static "covid/CORONA.jpg"%}');
+        }
+
+        .container {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+
+    <body id="bg">
+        <h1 style="color: white;text-align:center"><span style="color: red;">COVID-19</span> <span
+                style="color: black;">World Wide Data</span></h1>
+        <p style="color: black;text-align: center;">Data By: <span style="color: red;">Rapid API</span></p>
+        <form style="margin-top:50px;" method="POST">
+            <div class="d-flex justify-content-center align-items-center">
+                {% csrf_token %}
+                <select class="form-control" style="width: 200px;" name="countryname" default="--select--">
+                    <option value="" disabled selected>Please choose one...</option>
+                    {% for country in country_list %}
+                    <option>{{country}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="d-flex justify-content-center align-items-center">
+                <input style="margin-top: 10px;" type="submit" class="btn btn-danger">
+            </div>
+        </form>
+        <h1 style="margin-top: 80px; color: black; text-align:center;">{{selectedcountry}}</h1>
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="container" style="border-radius: 10px; background-color: orange; height:100px; width: 200px">
+                <h1 style="text-align: center; color: rgba(0, 0, 0, 0.822);">{{total_cases}}</h1>
+                <p style="text-align: center; color: rgba(0, 0, 0, 0.822);">Total Cases</p>
+            </div>
+            <div class="container" style="border-radius: 10px; background-color: red; height:100px; width: 200px">
+                <h1 style="text-align: center; color: rgba(0, 0, 0, 0.822);">{{total_deaths}}</h1>
+                <p style="text-align: center; color: rgba(0, 0, 0, 0.822);">Total Deaths</p>
+            </div>
+            <div class="container" style="border-radius: 10px; background-color: green; height:100px; width: 200px">
+                <h1 style="text-align: center; color: white;">{{total_recovered}}</h1>
+                <p style="text-align: center; color: white;">Total Recovered</p>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="container" style="border-radius: 10px; background-color: yellow; height:100px; width: 200px">
+                <h1 style="text-align: center; color: rgba(0, 0, 0, 0.822);">{{new_cases}}</h1>
+                <p style="text-align: center; color: rgba(0, 0, 0, 0.822);">New Cases</p>
+            </div>
+            <div class="container" style="border-radius: 10px; background-color: blue; height:100px; width: 200px">
+                <h1 style="text-align: center; color: white;">{{active_cases}}</h1>
+                <p style="text-align: center; color: white;">Active Cases</p>
+            </div>
+            <div class="container" style="border-radius: 10px; background-color: aqua; height:100px; width: 200px">
+                <h1 style="text-align: center; color: rgba(0, 0, 0, 0.822);">{{serious_critical}}</h1>
+                <p style="text-align: center; color: rgba(0, 0, 0, 0.822);">Critical Cases</p>
+            </div>
+            <!-- <div class="container" style="border-radius: 10px; background-color: lightblue; height:100px; width: 200px">
+                <h1 style="text-align: center; color: white;">{{new_deaths}}</h1>
+                <p style="text-align: center; color: white;">New Deaths</p>
+            </div> -->
+        </div>
+        <p style="margin-top: 130px; color: black;text-align: center;">Developed By <span style="color: red;">Harjeet
+                Singh</span></p>
+    </body>
+
+</html>
